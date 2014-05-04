@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.15      2014-05-04 22:20:19Z
           - remove the install-side pod test with encoding complaints
           - canonical repository moved to
             https://github.com/moose/MooseX-Types-ISO8601

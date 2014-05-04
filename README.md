@@ -2,6 +2,10 @@
 
 MooseX::Types::ISO8601 - ISO8601 date and duration string type constraints and coercions for Moose
 
+# VERSION
+
+version 0.15
+
 # SYNOPSIS
 
     use MooseX::Types::ISO8601 qw/
@@ -27,8 +31,12 @@ MooseX::Types::ISO8601 - ISO8601 date and duration string type constraints and c
 
 # DESCRIPTION
 
-This module packages several [TypeConstraints](http://search.cpan.org/perldoc?Moose::Util::TypeConstraints) with
+This module packages several [TypeConstraints](https://metacpan.org/pod/Moose::Util::TypeConstraints) with
 coercions for working with ISO8601 date strings and the DateTime suite of objects.
+
+# NAME
+
+MooseX::Types::ISO8601 - ISO8601 date and duration string type constraints and coercions for Moose
 
 # DATE CONSTRAINTS
 
@@ -57,9 +65,9 @@ An ISO8601 combined datetime string with a fully specified timezone. E.g. `2009-
 ## ISO8601StrictDateTimeTZStr
 
 As above, only in addition to validating the strings against regular
-expressions, an attempt is made to actually parse the data into a [DateTime](http://search.cpan.org/perldoc?DateTime)
-object.  This will catch cases like '2013-02-31' which look correct but do not
-correspond to real-world values.  Note that this is bears a computation
+expressions, an attempt is made to actually parse the data into a [DateTime](https://metacpan.org/pod/DateTime)
+object.  This will catch cases like `2013-02-31` which look correct but do not
+correspond to real-world values.  Note that this bears a computation
 penalty.
 
 ## COERCIONS
@@ -72,7 +80,7 @@ The date types will coerce from:
 
 - ` DateTime `
 
-    The duration represented as a [DateTime](http://search.cpan.org/perldoc?DateTime) object.
+    The duration represented as a [DateTime](https://metacpan.org/pod/DateTime) object.
 
 - ` Str `
 
@@ -103,7 +111,7 @@ The date types will coerce from:
     2012-01-13T170500Z => 2012-01-13T17:05:00Z
     20120113T17:05:00Z => 2012-01-13T17:05:00Z
 
-    In addition, there are coercions from these string types to [DateTime](http://search.cpan.org/perldoc?DateTime).
+    In addition, there are coercions from these string types to [DateTime](https://metacpan.org/pod/DateTime).
 
 # DURATION CONSTRAINTS
 
@@ -129,14 +137,14 @@ The duration types will coerce from:
 
 - ` DateTime::Duration `
 
-    The duration represented as a [DateTime::Duration](http://search.cpan.org/perldoc?DateTime::Duration) object.
+    The duration represented as a [DateTime::Duration](https://metacpan.org/pod/DateTime::Duration) object.
 
 The duration types will coerce to:
 
 - ` Duration `
 
-    A [DateTime::Duration](http://search.cpan.org/perldoc?DateTime::Duration), i.e. the ` Duration ` constraint from
-    [MooseX::Types::DateTime](http://search.cpan.org/perldoc?MooseX::Types::DateTime).
+    A [DateTime::Duration](https://metacpan.org/pod/DateTime::Duration), i.e. the ` Duration ` constraint from
+    [MooseX::Types::DateTime](https://metacpan.org/pod/MooseX::Types::DateTime).
 
 # FEATURES
 
@@ -161,13 +169,13 @@ reading or writing.
 
 # SEE ALSO
 
-- [MooseX::Types::DateTime](http://search.cpan.org/perldoc?MooseX::Types::DateTime)
-- [DateTime](http://search.cpan.org/perldoc?DateTime)
-- [DateTime::Duration](http://search.cpan.org/perldoc?DateTime::Duration)
-- [DateTime::Format::ISO8601](http://search.cpan.org/perldoc?DateTime::Format::ISO8601)
-- [DateTime::Format::Duration](http://search.cpan.org/perldoc?DateTime::Format::Duration)
-- [http://en.wikipedia.org/wiki/ISO\_8601](http://en.wikipedia.org/wiki/ISO\_8601)
-- [http://dotat.at/tmp/ISO\_8601-2004\_E.pdf](http://dotat.at/tmp/ISO\_8601-2004\_E.pdf)
+- [MooseX::Types::DateTime](https://metacpan.org/pod/MooseX::Types::DateTime)
+- [DateTime](https://metacpan.org/pod/DateTime)
+- [DateTime::Duration](https://metacpan.org/pod/DateTime::Duration)
+- [DateTime::Format::ISO8601](https://metacpan.org/pod/DateTime::Format::ISO8601)
+- [DateTime::Format::Duration](https://metacpan.org/pod/DateTime::Format::Duration)
+- [http://en.wikipedia.org/wiki/ISO\_8601](http://en.wikipedia.org/wiki/ISO_8601)
+- [http://dotat.at/tmp/ISO\_8601-2004\_E.pdf](http://dotat.at/tmp/ISO_8601-2004_E.pdf)
 
 # VERSION CONTROL
 
@@ -191,3 +199,26 @@ The development of this code was sponsored by my employer [http://www.state51.co
     Copyright (c) 2009 Tomas Doran. Some rights reserved.
     This program is free software; you can redistribute
     it and/or modify it under the same terms as Perl itself.
+
+# AUTHOR
+
+Tomas Doran (t0m) <bobtfish@bobtfish.net>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2009 by Tomas Doran.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+# CONTRIBUTORS
+
+- Aaron Moses <zebardy@gmail.com>
+- Dave Lambley <dave@lambley.me.uk>
+- Dave Lambley <davel@isosceles.(none)>
+- Dave Lambley <davel@state51.co.uk>
+- Karen Etheridge <ether@cpan.org>
+- Tomas Doran (t0m) <t0m@state51.co.uk>
+- Tomas Doran <bobtfish@bobtfish.net>
+- t0m <bobtfish@bobtfish.net>
+- zebardy <zebardy@gmail.com>
