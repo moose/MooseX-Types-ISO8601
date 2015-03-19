@@ -51,7 +51,7 @@ use MooseX::Types 0.10 -declare => [qw(
 my $date_re =       qr/^(\d{4})-(\d{2})-(\d{2})$/;
 my $time_re =                               qr/^(\d{2}):(\d{2}):(\d{2})(?:(?:\.|,)(\d+))?Z?$/;
 my $datetime_re =   qr/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:(?:\.|,)(\d+))?Z?$/;
-my $datetimetz_re = qr/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:(?:\.|,)(\d+))?((?:\+|-)\d\d:\d\d)$/;
+my $datetimetz_re = qr/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:(?:\.|,)(\d+))?((?:(?:\+|-)\d\d:\d\d)|Z)$/;
 
 subtype ISO8601DateStr,
     as Str,

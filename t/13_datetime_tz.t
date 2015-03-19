@@ -7,7 +7,7 @@ use MooseX::Types::ISO8601 qw/
     ISO8601StrictDateTimeTZStr
 /;
 
-use Test::More tests => 9;
+use Test::More tests => 11;
 use Test::Deep;
 use Test::NoWarnings 1.04 ':early';
 
@@ -48,6 +48,14 @@ use Test::NoWarnings 1.04 ':early';
     # XXX - currently we don't generate nanosecond offsets for compatibility.
     note "DateTime into string";
     is(to_ISO8601DateTimeTZStr($datetime), "2011-02-03T01:05:06+01:30");
+}
+
+{
+    ok(is_ISO8601DateTimeTZStr('2013-02-21T02:00:00Z'),
+        'String with Z for zero UTC offset');
+    ok(is_ISO8601StrictDateTimeTZStr('2013-02-21T02:00:00Z'),
+        'String with Z for zero UTC offset with DateTime check');
+
 }
 
 {
