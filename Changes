@@ -1,4 +1,6 @@
-Revision history for MooseX-Types-ISO8601
+Revision history for {{$dist->name}}
+
+{{$NEXT}}
 
 0.16      2015-03-23 02:32:19Z
           - Allow 'Z' offset with ISO8601*DateTimeTZStr (RT#102870, thanks
