@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          - Allow 'Z' offset with ISO8601*DateTimeTZStr (RT#102870, thanks
+            Gregory Oschwald!)
 
 0.15      2014-05-04 22:20:19Z
           - remove the install-side pod test with encoding complaints
