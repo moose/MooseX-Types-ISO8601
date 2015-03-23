@@ -39,6 +39,7 @@ use MooseX::Types::ISO8601 qw/
 }
 
 use Test::More;
+use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 use Test::Fatal;
 use DateTime;
 

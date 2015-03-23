@@ -3,6 +3,7 @@ use warnings;
 use Test::More;
 
 use Test::Requires 'MooseX::Types::DateTime::MySQL';
+use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 
 use MooseX::Types::ISO8601 qw/
     ISO8601DateStr

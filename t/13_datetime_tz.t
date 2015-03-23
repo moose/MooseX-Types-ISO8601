@@ -7,9 +7,9 @@ use MooseX::Types::ISO8601 qw/
     ISO8601StrictDateTimeTZStr
 /;
 
-use Test::More tests => 13;
+use Test::More;
 use Test::Deep;
-use Test::NoWarnings 1.04 ':early';
+use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 
 {
     note "String with offset into datetime";
@@ -70,3 +70,4 @@ use Test::NoWarnings 1.04 ':early';
     is(to_ISO8601StrictDateTimeTZStr('2013-02-01T05:00:00+01:00'), '2013-02-01T05:00:00+01:00');
 }
 
+done_testing;
