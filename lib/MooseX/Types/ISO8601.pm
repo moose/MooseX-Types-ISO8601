@@ -286,9 +286,7 @@ subtype ISO8601DateTimeDurationStr,
 
 __END__
 
-=head1 NAME
-
-MooseX::Types::ISO8601 - ISO8601 date and duration string type constraints and coercions for Moose
+=pod
 
 =head1 SYNOPSIS
 
@@ -453,92 +451,26 @@ Probably full of them, patches are very welcome.
 
 Specifically missing features:
 
-=over
-
-=item *
-
-No timezone support - all times are assumed UTC
-
-=item *
-
-No week number type
-
-=item *
-
-"Basic format", which lacks separator characters, is not supported for
-reading or writing.
-
-=item *
-
-Tests are rubbish.
-
-=back
+=for :list
+* No timezone support - all times are assumed UTC
+* No week number type
+* "Basic format", which lacks separator characters, is not supported for reading or writing.
+* Tests are rubbish.
 
 =head1 SEE ALSO
 
-=over
+=for :list
 
-=item *
+* L<MooseX::Types::DateTime>
+* L<DateTime>
+* L<DateTime::Duration>
+* L<DateTime::Format::ISO8601>
+* L<DateTime::Format::Duration>
+* L<http://en.wikipedia.org/wiki/ISO_8601>
+* L<http://dotat.at/tmp/ISO_8601-2004_E.pdf>
 
-L<MooseX::Types::DateTime>
-
-=item *
-
-L<DateTime>
-
-=item *
-
-L<DateTime::Duration>
-
-=item *
-
-L<DateTime::Format::ISO8601>
-
-=item *
-
-L<DateTime::Format::Duration>
-
-=item *
-
-L<http://en.wikipedia.org/wiki/ISO_8601>
-
-=item *
-
-L<http://dotat.at/tmp/ISO_8601-2004_E.pdf>
-
-=back
-
-=head1 VERSION CONTROL
-
-    http://github.com/bobtfish/moosex-types-iso8601/tree/master
-
-Patches are welcome.
-
-=head1 AUTHOR
-
-=over
-
-=item Tomas Doran (t0m) C<< <bobtfish@bobtfish.net> >>
-
-=item Dave Lambley C<< <davel@state51.co.uk> >>
-
-=back
+=head1 ACKNOWLEDGEMENTS
 
 The development of this code was sponsored by my employer L<http://www.state51.co.uk>.
 
-=head2 Contributors
-
-=over
-
-=item Aaron Moses
-
-=back
-
-=head1 COPYRIGHT
-
-    Copyright (c) 2009 Tomas Doran. Some rights reserved.
-    This program is free software; you can redistribute
-    it and/or modify it under the same terms as Perl itself.
-
 =cut
-
