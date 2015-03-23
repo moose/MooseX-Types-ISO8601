@@ -3,7 +3,6 @@ use warnings;
 
 use Test::More 0.88;
 use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
-
 use MooseX::Types::ISO8601 'ISO8601DateStr';
 
 ok(is_ISO8601DateStr('2014-01-01'), 'is_ISO8601DateStr');
