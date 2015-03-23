@@ -16,7 +16,6 @@ use MooseX::Types::DateTime 0.03 qw(Duration DateTime);
 use MooseX::Types::Moose qw/Str Num/;
 use List::MoreUtils qw/ zip /;
 use Scalar::Util qw/ looks_like_number /;
-use Class::Load 'try_load_class';
 use Module::Runtime 'use_module';
 use Try::Tiny;
 use Safe::Isa;
@@ -24,7 +23,7 @@ use Safe::Isa;
 our $MYSQL;
 BEGIN {
     $MYSQL = 0;
-    if (try_load_class 'MooseX::Types::DateTime::MySQL') {
+    if (eval { require MooseX::Types::DateTime::MySQL; 1 }) {
             MooseX::Types::DateTime::MySQL->import(qw/ MySQLDateTime /);
             $MYSQL = 1;
     }
