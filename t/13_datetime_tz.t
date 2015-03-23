@@ -7,7 +7,7 @@ use MooseX::Types::ISO8601 qw/
     ISO8601StrictDateTimeTZStr
 /;
 
-use Test::More tests => 11;
+use Test::More tests => 13;
 use Test::Deep;
 use Test::NoWarnings 1.04 ':early';
 
@@ -56,6 +56,10 @@ use Test::NoWarnings 1.04 ':early';
     ok(is_ISO8601StrictDateTimeTZStr('2013-02-21T02:00:00Z'),
         'String with Z for zero UTC offset with DateTime check');
 
+    ok(!is_ISO8601DateTimeTZStr('2013-02-21T02:00:00'),
+        'String without Z');
+    ok(!is_ISO8601StrictDateTimeTZStr('2013-02-21T02:00:00'),
+        'String without Z');
 }
 
 {
