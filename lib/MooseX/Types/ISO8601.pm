@@ -20,6 +20,7 @@ use Scalar::Util qw/ looks_like_number /;
 use Module::Runtime 'use_module';
 use Try::Tiny;
 use Safe::Isa;
+use if MooseX::Types->VERSION >= 0.42, 'namespace::autoclean';
 
 our $MYSQL;
 BEGIN {
