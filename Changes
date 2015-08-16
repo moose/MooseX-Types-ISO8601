@@ -1,6 +1,7 @@
 Revision history for MooseX-Types-ISO8601
 
 {{$NEXT}}
+          - update some distribution tooling
 
 0.17      2015-05-21 01:51:32Z
           - eliminate prerequisite on List::MoreUtils
