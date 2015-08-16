@@ -1,7 +1,7 @@
 package MooseX::Types::ISO8601;
 # ABSTRACT: ISO8601 date and duration string type constraints and coercions for Moose
 
-our $VERSION = '0.18';
+our $VERSION = '0.19';
 
 use strict;
 use warnings;
