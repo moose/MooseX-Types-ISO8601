@@ -468,7 +468,6 @@ Specifically missing features:
 =head1 SEE ALSO
 
 =for :list
-
 * L<MooseX::Types::DateTime>
 * L<DateTime>
 * L<DateTime::Duration>
