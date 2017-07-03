@@ -453,11 +453,11 @@ accuracy. A full stop character is used as the decimal separator, which is
 allowed, but deprecated in preference to the comma character in
 I<ISO 8601:2004>.
 
-=head1 BUGS
+=head1 LIMITATIONS
 
-Probably full of them, patches are very welcome.
+This module is probably full of bugs; patches are very welcome.
 
-Specifically missing features:
+Specifically, there are missing features:
 
 =for :list
 * No timezone support - all times are assumed UTC
@@ -478,6 +478,6 @@ Specifically missing features:
 
 =head1 ACKNOWLEDGEMENTS
 
-The development of this code was sponsored by my employer L<http://www.state51.co.uk>.
+The development of this code was sponsored by my (Tom's) employer L<http://www.state51.co.uk>.
 
 =cut
