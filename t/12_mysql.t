@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use Test::More;
+use Test::More 0.88;
 use Test::Requires 'MooseX::Types::DateTime::MySQL';
 use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 
