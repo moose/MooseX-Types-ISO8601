@@ -56,7 +56,14 @@ my $datetimetz_re = qr/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:(?:\.|
 
 subtype ISO8601DateStr,
     as Str,
-    where { /$date_re/ };
+    where { /$date_re/ },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && '
+                . qq{ $_[1] =~ /$date_re/ };
+        }
+        : ()
+    );
 
 # XXX TODO: this doesn't match all the ISO Time formats in the spec:
 # hhmmss
@@ -65,22 +72,55 @@ subtype ISO8601DateStr,
 # hh:mm
 subtype ISO8601TimeStr,
     as Str,
-    where { /$time_re/ };
+    where { /$time_re/ },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && '
+                . qq{ $_[1] =~ /$time_re/ };
+        }
+        : ()
+    );
 
 subtype ISO8601DateTimeStr,
     as Str,
-    where { /$datetime_re/ };
+    where { /$datetime_re/ },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && '
+                . qq{ $_[1] =~ /$datetime_re/ };
+        }
+        : ()
+    );
 
 # XXX TODO: this doesn't match these offset indicators:
 # ±hhmm
 # ±hh
 subtype ISO8601DateTimeTZStr,
     as Str,
-    where { /$datetimetz_re/ };
+    where { /$datetimetz_re/ },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && '
+                . qq{ $_[1] =~ /$datetimetz_re/ };
+        }
+        : ()
+     );
+
+my $inlined_parse_datetime_format = <<'EOF';
+    (eval {
+        Module::Runtime::use_module('DateTime::Format::ISO8601')->parse_datetime(%s)
+    })->$Safe::Isa::_isa('DateTime')
+EOF
 
 subtype ISO8601StrictDateStr,
     as ISO8601DateStr,
-    where { (try { use_module('DateTime::Format::ISO8601')->parse_datetime($_) })->$_isa('DateTime') };
+    where { (try { use_module('DateTime::Format::ISO8601')->parse_datetime($_) })->$_isa('DateTime') },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && ' . sprintf($inlined_parse_datetime_format, $_[1]);
+        }
+        : ()
+    );
 
 subtype ISO8601StrictTimeStr,
     as ISO8601TimeStr,
@@ -88,15 +128,41 @@ subtype ISO8601StrictTimeStr,
         (   try { use_module('DateTime::Format::ISO8601')->parse_datetime($_) }
          || try { DateTime::Format::ISO8601->parse_time($_) }
         )->$_isa('DateTime')
-    };
+    },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && ('
+            . sprintf($inlined_parse_datetime_format, $_[1])
+            . <<"EOF"
+                ||
+                (eval {
+                    DateTime::Format::ISO8601->parse_time($_[1]) }
+                )->\$Safe::Isa::_isa('DateTime')
+            )
+EOF
+        }
+        : ()
+    );
 
 subtype ISO8601StrictDateTimeStr,
     as ISO8601DateTimeStr,
-    where { (try { use_module('DateTime::Format::ISO8601')->parse_datetime($_) })->$_isa('DateTime') };
+    where { (try { use_module('DateTime::Format::ISO8601')->parse_datetime($_) })->$_isa('DateTime') },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && ' . sprintf($inlined_parse_datetime_format, $_[1]);
+        }
+        : ()
+    );
 
 subtype ISO8601StrictDateTimeTZStr,
     as ISO8601DateTimeTZStr,
-    where { (try { use_module('DateTime::Format::ISO8601')->parse_datetime($_) })->$_isa('DateTime') };
+    where { (try { use_module('DateTime::Format::ISO8601')->parse_datetime($_) })->$_isa('DateTime') },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && ' . sprintf($inlined_parse_datetime_format, $_[1]);
+        }
+        : ()
+    );
 
 
 # TODO: According to ISO 8601:2004(E), the lowest order components may be
@@ -107,17 +173,38 @@ subtype ISO8601StrictDateTimeTZStr,
 my $timeduration_re = qr/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d{0,2})(?:(?:\.|,)(\d+))?S)?$/;
 subtype ISO8601TimeDurationStr,
     as Str,
-    where { grep { looks_like_number($_) } /$timeduration_re/; };
+    where { grep { looks_like_number($_) } /$timeduration_re/; },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && ' .
+            "grep { Scalar::Util::looks_like_number(\$_) } $_[1] =~ /$timeduration_re/"
+        }
+        : ()
+    );
 
 my $dateduration_re = qr/^P(?:(\d+)Y)?(?:(\d{1,2})M)?(?:(\d{1,2})D)?$/;
 subtype ISO8601DateDurationStr,
     as Str,
-    where { grep { looks_like_number($_) } /$dateduration_re/ };
+    where { grep { looks_like_number($_) } /$dateduration_re/ },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && ' .
+            "grep { Scalar::Util::looks_like_number(\$_) } $_[1] =~ /$dateduration_re/"
+        }
+        : ()
+    );
 
 my $datetimeduration_re = qr/^P(?:(\d+)Y)?(?:(\d{1,2})M)?(?:(\d{1,2})D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d{0,2})(?:(?:\.|,)(\d+))?)S)?$/;
 subtype ISO8601DateTimeDurationStr,
     as Str,
-    where { grep { looks_like_number($_) } /$datetimeduration_re/ };
+    where { grep { looks_like_number($_) } /$datetimeduration_re/ },
+    ( $Moose::VERSION >= 2.0200
+        ? inline_as {
+            $_[0]->parent()->_inline_check( $_[1] ) . ' && ' .
+            "grep { Scalar::Util::looks_like_number(\$_) } $_[1] =~ /$datetimeduration_re/"
+        }
+        : ()
+    );
 
 {
     my %coerce = (
