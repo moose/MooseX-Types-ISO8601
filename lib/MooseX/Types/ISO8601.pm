@@ -49,10 +49,10 @@ use MooseX::Types 0.10 -declare => [qw(
     ISO8601DateTimeDurationStr
 )];
 
-my $date_re =       qr/^(\d{4})-(\d{2})-(\d{2})$/;
-my $time_re =                               qr/^(\d{2}):(\d{2}):(\d{2})(?:(?:\.|,)(\d+))?Z?$/;
-my $datetime_re =   qr/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:(?:\.|,)(\d+))?Z?$/;
-my $datetimetz_re = qr/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:(?:\.|,)(\d+))?((?:(?:\+|-)\d\d:\d\d)|Z)$/;
+my $date_re =       qr/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/;
+my $time_re =                               qr/^([0-9]{2}):([0-9]{2}):([0-9]{2})(?:(?:\.|,)([0-9]+))?Z?$/;
+my $datetime_re =   qr/^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(?:(?:\.|,)([0-9]+))?Z?$/;
+my $datetimetz_re = qr/^([0-9]{4})-([0-9]{2})-([0-9]{2})T([0-9]{2}):([0-9]{2}):([0-9]{2})(?:(?:\.|,)([0-9]+))?((?:(?:\+|-)[0-9][0-9]:[0-9][0-9])|Z)$/;
 
 subtype ISO8601DateStr,
     as Str,
@@ -104,17 +104,17 @@ subtype ISO8601StrictDateTimeTZStr,
 # a decimal fraction.  We don't support these both together, you may only have
 # a fraction on the seconds component.
 
-my $timeduration_re = qr/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d{0,2})(?:(?:\.|,)(\d+))?S)?$/;
+my $timeduration_re = qr/^PT(?:([0-9]+)H)?(?:([0-9]+)M)?(?:([0-9]{0,2})(?:(?:\.|,)([0-9]+))?S)?$/;
 subtype ISO8601TimeDurationStr,
     as Str,
     where { grep { looks_like_number($_) } /$timeduration_re/; };
 
-my $dateduration_re = qr/^P(?:(\d+)Y)?(?:(\d{1,2})M)?(?:(\d{1,2})D)?$/;
+my $dateduration_re = qr/^P(?:([0-9]+)Y)?(?:([0-9]{1,2})M)?(?:([0-9]{1,2})D)?$/;
 subtype ISO8601DateDurationStr,
     as Str,
     where { grep { looks_like_number($_) } /$dateduration_re/ };
 
-my $datetimeduration_re = qr/^P(?:(\d+)Y)?(?:(\d{1,2})M)?(?:(\d{1,2})D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d{0,2})(?:(?:\.|,)(\d+))?)S)?$/;
+my $datetimeduration_re = qr/^P(?:([0-9]+)Y)?(?:([0-9]{1,2})M)?(?:([0-9]{1,2})D)?(?:T(?:([0-9]+)H)?(?:([0-9]+)M)?(?:([0-9]{0,2})(?:(?:\.|,)([0-9]+))?)S)?$/;
 subtype ISO8601DateTimeDurationStr,
     as Str,
     where { grep { looks_like_number($_) } /$datetimeduration_re/ };
@@ -157,7 +157,7 @@ subtype ISO8601DateTimeDurationStr,
         ISO8601DateStr, sub { $_[0]->ymd('-') },
         ISO8601DateTimeStr, sub { die "cannot coerce non-UTC time" if ($_[0]->offset!=0); $_[0]->ymd('-') . 'T' . $_[0]->hms(':') . 'Z' },
         ISO8601DateTimeTZStr, sub {
-            DateTime::TimeZone->offset_as_string($_[0]->offset) =~ /(.\d\d)(\d\d)/;
+            DateTime::TimeZone->offset_as_string($_[0]->offset) =~ /(.[0-9][0-9])([0-9][0-9])/;
             $_[0]->ymd('-') . 'T' . $_[0]->hms(':') . "$1:$2"
         },
     );
@@ -182,18 +182,18 @@ subtype ISO8601DateTimeDurationStr,
 {
     my %coerce = (
         ISO8601TimeStr, sub {
-            $_ =~ s/^(\d\d) \:? (\d\d) \:? (\d\d([\.\,]\d+)?) (([+-]00\:?(00)?)|Z) $
+            $_ =~ s/^([0-9][0-9]) \:? ([0-9][0-9]) \:? ([0-9][0-9]([\.\,][0-9]+)?) (([+-]00\:?(00)?)|Z) $
                     /${1}:${2}:${3}Z/x;
             return $_;
         },
         ISO8601DateStr, sub {
-            $_ =~ s/^(\d{4}) \-? (\d\d) \-? (\d\d)$
+            $_ =~ s/^([0-9]{4}) \-? ([0-9][0-9]) \-? ([0-9][0-9])$
                     /${1}-${2}-${3}/x;
             return $_;
         },
         ISO8601DateTimeStr, sub {
-            $_ =~ s/^(\d{4}) \-? (\d\d) \-? (\d\d)
-                    T(\d\d) \:? (\d\d) \:? (\d\d([\.\,]\d+)?)
+            $_ =~ s/^([0-9]{4}) \-? ([0-9][0-9]) \-? ([0-9][0-9])
+                    T([0-9][0-9]) \:? ([0-9][0-9]) \:? ([0-9][0-9]([\.\,][0-9]+)?)
                     (([+-]00\:?(00)?)|Z)$
                     /${1}-${2}-${3}T${4}:${5}:${6}Z/x;
             return $_;
