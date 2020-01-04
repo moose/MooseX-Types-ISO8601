@@ -1,6 +1,7 @@
 Revision history for MooseX-Types-ISO8601
 
 {{$NEXT}}
+          - provide inlined versions of the types
 
 0.18      2015-08-16 02:00:45Z
           - update some distribution tooling
