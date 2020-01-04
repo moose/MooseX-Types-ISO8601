@@ -8,7 +8,7 @@ MooseX::Types::ISO8601 - ISO8601 date and duration string type constraints and c
 
 =head1 VERSION
 
-version 0.18
+version 0.19
 
 =head1 SYNOPSIS
 
@@ -167,11 +167,11 @@ accuracy. A full stop character is used as the decimal separator, which is
 allowed, but deprecated in preference to the comma character in
 I<ISO 8601:2004>.
 
-=head1 BUGS
+=head1 LIMITATIONS
 
-Probably full of them, patches are very welcome.
+This module is probably full of bugs; patches are very welcome.
 
-Specifically missing features:
+Specifically, there are missing features:
 
 =over 4
 
@@ -197,21 +197,50 @@ Tests are rubbish.
 
 =over 4
 
+=item *
 
+L<MooseX::Types::DateTime>
+
+=item *
+
+L<DateTime>
+
+=item *
+
+L<DateTime::Duration>
+
+=item *
+
+L<DateTime::Format::ISO8601>
+
+=item *
+
+L<DateTime::Format::Duration>
+
+=item *
+
+L<http://en.wikipedia.org/wiki/ISO_8601>
+
+=item *
+
+L<http://dotat.at/tmp/ISO_8601-2004_E.pdf>
 
 =back
 
-* L<MooseX::Types::DateTime>
-* L<DateTime>
-* L<DateTime::Duration>
-* L<DateTime::Format::ISO8601>
-* L<DateTime::Format::Duration>
-* L<http://en.wikipedia.org/wiki/ISO_8601>
-* L<http://dotat.at/tmp/ISO_8601-2004_E.pdf>
-
 =head1 ACKNOWLEDGEMENTS
 
-The development of this code was sponsored by my employer L<http://www.state51.co.uk>.
+The development of this code was sponsored by my (Tom's) employer L<http://www.state51.co.uk>.
+
+=head1 SUPPORT
+
+Bugs may be submitted through L<the RT bug tracker|https://rt.cpan.org/Public/Dist/Display.html?Name=MooseX-Types-ISO8601>
+(or L<bug-MooseX-Types-ISO8601@rt.cpan.org|mailto:bug-MooseX-Types-ISO8601@rt.cpan.org>).
+
+There is also a mailing list available for users of this distribution, at
+L<http://lists.perl.org/list/moose.html>.
+
+There is also an irc channel available for users of this distribution, at
+L<C<#moose> on C<irc.perl.org>|irc://irc.perl.org/#moose>.
 
 =head1 AUTHORS
 
@@ -229,7 +258,7 @@ Dave Lambley <davel@state51.co.uk>
 
 =head1 CONTRIBUTORS
 
-=for stopwords Karen Etheridge Dave Lambley zebardy Aaron Moses Gregory Oschwald
+=for stopwords Karen Etheridge Dave Lambley zebardy Gregory Oschwald Mark Fowler
 
 =over 4
 
@@ -247,11 +276,11 @@ zebardy <zebardy@gmail.com>
 
 =item *
 
-Aaron Moses <zebardy@gmail.com>
+Gregory Oschwald <goschwald@maxmind.com>
 
 =item *
 
-Gregory Oschwald <goschwald@maxmind.com>
+Mark Fowler <mark@twoshortplanks.com>
 
 =back
 
