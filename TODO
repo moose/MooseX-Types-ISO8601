@@ -2,3 +2,5 @@
 There are some TODOs in comments marking some formats that we do not yet recognize
 
 and a few RT tickets describing the same
+
+handle stuff from Time::Moment too
