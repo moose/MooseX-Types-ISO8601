@@ -36,8 +36,14 @@ for (
     my ($type, $testdata) = @{ $_ };
 
     ok($type->check($testdata), 'ascii ' . $type->name);
-    $testdata =~ s/[0-9]/\x{1E951}/; # \N{ADLAM DIGIT ONE}
-    ok(!$type->check($testdata), 'non-ascii ' . $type->name);
+    foreach my $unicode_digit (
+        "\x{0661}",     # \N{ARABIC-INDIC DIGIT ONE} unicode 1.1
+        "\x{09EA}",     # \N{BENGALI DIGIT FOUR}     unicode 1.1
+        "\x{1E951}",    # \N{ADLAM DIGIT ONE}        unicode 9.0
+    ) {
+        my $bad_data = $testdata =~ s/[0-9]/$unicode_digit/;
+        ok(!$type->check($bad_data), 'non-ascii ' . $type->name);
+    }
 }
 
 done_testing;
