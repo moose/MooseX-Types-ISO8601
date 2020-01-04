@@ -1,7 +1,9 @@
 Revision history for MooseX-Types-ISO8601
 
 {{$NEXT}}
-          - provide inlined versions of the types
+          - provide inlined versions of the types (thanks, Gregory Oschwald!)
+          - non-ascii digits are no longer allowed in strings (thanks, Mark
+            Fowler!)
 
 0.18      2015-08-16 02:00:45Z
           - update some distribution tooling
