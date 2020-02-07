@@ -565,6 +565,6 @@ Specifically, there are missing features:
 
 =head1 ACKNOWLEDGEMENTS
 
-The development of this code was sponsored by my (Tom's) employer L<http://www.state51.co.uk>.
+The development of this code was sponsored by my (Tom's) employer L<http://www.state51.com/>.
 
 =cut
