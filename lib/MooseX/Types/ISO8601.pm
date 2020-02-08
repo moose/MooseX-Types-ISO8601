@@ -547,7 +547,7 @@ This module is probably full of bugs; patches are very welcome.
 Specifically, there are missing features:
 
 =for :list
-* No timezone support - all times are assumed UTC
+* When no time-zone is specified, UTC is assumed. (Should floating timezone be used?)
 * No week number type
 * "Basic format", which lacks separator characters, is not supported for reading or writing.
 * Tests are rubbish.
@@ -565,6 +565,6 @@ Specifically, there are missing features:
 
 =head1 ACKNOWLEDGEMENTS
 
-The development of this code was sponsored by my (Tom's) employer L<http://www.state51.co.uk>.
+The development of this code was sponsored by my (Tom's) employer L<http://www.state51.com/>.
 
 =cut

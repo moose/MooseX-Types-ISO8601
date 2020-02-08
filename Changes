@@ -1,6 +1,7 @@
 Revision history for MooseX-Types-ISO8601
 
 {{$NEXT}}
+          - update docs wrt time zone support.
 
 0.19      2020-01-04 22:57:19Z
           - provide inlined versions of the types (thanks, Gregory Oschwald!)
