@@ -78,6 +78,9 @@ foreach my $tp (
         ['PT51S', 'PT00H00M51S'],
         ['PT001H15M01S', 'PT01H15M01S'],
         ['PT0006M03S', 'PT00H06M03S'],
+        ['PT0S',   'PT00H00M00S'],
+        ['PT00S',  'PT00H00M00S'],
+        ['PT0.0S', 'PT00H00M00S'],
     ) {
     my $t = $tp->[0];
     my $ret = $tp->[1] || $t;
